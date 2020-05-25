@@ -1,0 +1,18 @@
+{
+  "name": "tinker",
+  "version": "1.0.0",
+  "description": "图片压缩工具",
+  "main": "lib/tinker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "tinker": "lib/tinker.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^5.1.0",
+    "esbuild": "^0.3.5"
+  }
+}
