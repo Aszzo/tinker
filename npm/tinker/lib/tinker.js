@@ -6,14 +6,14 @@ const path = require('path');
 let  flags = [];
 program
     .version(pkgConfig.version, '-v, --version')
-    .usage('<command> [options]')
-    .option('-i, --input <value>', '目标文件所在的目录|目标文件路径')
+    .usage('[options]')
+    .requiredOption('-i, --input <value>', '目标文件所在的目录|目标文件路径')
     .option('-q, --quality <number>', '压缩图片的质量(0-100)', 80)
 ;
 program.parse(process.argv);
 
 if (program.input) {
-    flags = [...flags, ...['-i', program.input]]
+    flags = [...flags, ...[program.input]]
 }
 flags = [...flags, ...['-q', program.quality]];
 

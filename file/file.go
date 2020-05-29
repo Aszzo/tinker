@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strconv"
 )
 // 获取文件类型
@@ -44,7 +45,7 @@ func ResizeJpg(path string, quality int) {
 		fmt.Printf("decode fail:")
 		log.Fatal(err)
 	}
-	file.Close()
+	defer file.Close()
 
 	m := resize.Resize(0, 0, img, resize.NearestNeighbor)
 
@@ -54,12 +55,16 @@ func ResizeJpg(path string, quality int) {
 	}
 	defer out.Close()
 
-	jpeg.Encode(out, m, &jpeg.Options{Quality: quality})
+	_ = jpeg.Encode(out, m, &jpeg.Options{Quality: quality})
 }
 // 压缩png
-func ResizePng(path string, quality int)  {
+func ResizePng(path string, quality int, filename string)  {
+	str, _ := os.Executable()
+	dir := filepath.Dir(str)
+
 	qualityString := strconv.Itoa(quality)
-	cmd := exec.Command("./pngquant", path, "--ext=.png", "--force", "--quality", qualityString)
+	cmd := exec.Command(dir+ "/pngquant", path, "--ext=.png", "--force", "--quality", qualityString)
+	//cmd := exec.Command("./pngquant", path, "--output=" + filename, "--force", "--quality", qualityString)
 	if err := cmd.Start(); err != nil {   // 运行命令
 		log.Fatal(err)
 	}

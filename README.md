@@ -12,11 +12,10 @@
 
 ```bazaar
 version/1.0.0
-Usage: tinker [-i input] [-q quality]
+Usage: tinker [filename] [-q quality]
 Options:
   -h    this help
-  -i string
-        目标文件所在的目录|目标文件路径
+
   -q int
         压缩图片的质量（0-100） (default 80)
 
