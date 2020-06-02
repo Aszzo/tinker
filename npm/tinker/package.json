@@ -1,6 +1,6 @@
 {
   "name": "tinker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "图片压缩工具",
   "main": "lib/tinker.js",
   "scripts": {
@@ -9,10 +9,12 @@
   "bin": {
     "tinker": "lib/tinker.js"
   },
+  "publishConfig": {
+    "registry": "http://npmnexus.pengpengla.com/repository/npm-private/"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^5.1.0",
-    "esbuild": "^0.3.5"
+    "commander": "^5.1.0"
   }
 }
