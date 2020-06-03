@@ -4,25 +4,27 @@ import (
 	"flag"
 	"fmt"
 	f "github.com/Aszzo/tinker/file"
-	"log"
 	"os"
 	p "path"
 )
 var (
-	i string
 	q int
+	i string
 )
 
-func init()  {
-	flag.IntVar(&q, "q", 80, "压缩图片的质量（0-100）")
-}
-func main()  {
-	flag.Parse()
-	var fileList []string
-	var i string
 
-	if len(os.Args) > 1{
-		i = os.Args[1]
+func main()  {
+	flag.StringVar(&i, "i", "", "目标文件夹|目标文件")
+	flag.IntVar(&q, "q", 80, "压缩图片的质量（0-100）")
+
+	flag.Parse()
+	fmt.Println(q)
+
+	var fileList []string
+	//var i string
+	//
+	if i != ""{
+	//	i = os.Args[1]
 
 		// 首先判断是文件还是文件夹
 		isDir := f.IsDir(i)
@@ -43,12 +45,9 @@ func main()  {
 	}
 }
 func resize(path string)  {
-	mime, err := f.GetFileContentType(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-	filenameWithSuffix := p.Base(path) //获取文件名带后缀
+	mime := f.GetFileContentType(path)
 
+	filenameWithSuffix := p.Base(path) //获取文件名带后缀
 	switch mime {
 		case "image/jpeg":
 			size := getFileSize(path)

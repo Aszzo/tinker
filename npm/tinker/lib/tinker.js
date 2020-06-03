@@ -13,15 +13,18 @@ program
 program.parse(process.argv);
 
 if (program.input) {
-    flags = [...flags, ...[program.input]]
+    flags = [...flags, ...['-i', program.input]]
 }
 flags = [...flags, ...['-q', program.quality]];
 
 const tinker = path.join(__dirname, '..', 'bin', 'tinker');
 
-child_process.execFile(tinker, flags, function (err, data) {
-    if (err) {
-        console.error(err)
-    }
-    console.log(data)
+const child = child_process.spawn(tinker, flags);
+
+child.stdout.on('data', data => {
+    console.log(data.toString())
 })
+
+child.stderr.on('data', (data) => {
+    console.error(`err: ${data}`);
+});
