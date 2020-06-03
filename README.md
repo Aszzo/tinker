@@ -14,8 +14,8 @@
 version/1.0.0
 Usage: tinker [-i input] [-q quality]
 Options:
-  -h    this help
-   -i string
+    -h    this help
+    -i string
           目标文件夹|目标文件
     -q int
           压缩图片的质量（0-100） (default 80)
