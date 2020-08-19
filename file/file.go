@@ -55,15 +55,22 @@ func ResizeJpg(path string, quality int) {
 	defer out.Close()
 
 	_ = jpeg.Encode(out, m, &jpeg.Options{Quality: quality})
+	defer func() {
+		size := GetFileSize(path)
+		fmt.Printf("压缩成功，压缩后文件大小%.2f kb \n", size)
+	}()
 }
 // 压缩png
 func ResizePng(path string, quality int, filename string)  {
 	str, _ := os.Executable()
 	dir := filepath.Dir(str)
-
 	qualityString := strconv.Itoa(quality)
 	cmd := exec.Command(dir+ "/pngquant", path, "--ext=.png", "--force", "--quality", qualityString)
-	//cmd := exec.Command("./pngquant", path, "--output=" + filename, "--force", "--quality", qualityString)
+	//cmd := exec.Command("./pngquant", path, "--ext=.png", "--force", "--quality", qualityString)
+	defer func() {
+		size := GetFileSize(path)
+		fmt.Printf("压缩成功，压缩后文件大小%.2f kb \n", size)
+	}()
 	if err := cmd.Run(); err != nil {   // 运行命令
 		log.Println(err)
 	}
@@ -82,4 +89,10 @@ func RangeDir(path string, fileList *[]string) {
 			*fileList = append(*fileList, filePath)
 		}
 	}
+}
+// 读取文件大小
+func GetFileSize(path string) float64  {
+	fileInfo, _ := os.Stat(path)
+	size := float64(fileInfo.Size()) / float64(1000)
+	return size
 }

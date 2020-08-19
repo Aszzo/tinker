@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	f "github.com/Aszzo/tinker/file"
-	"os"
 	p "path"
 )
 var (
@@ -18,7 +17,6 @@ func main()  {
 	flag.IntVar(&q, "q", 80, "压缩图片的质量（0-100）")
 
 	flag.Parse()
-	fmt.Println(q)
 
 	var fileList []string
 	//var i string
@@ -50,21 +48,15 @@ func resize(path string)  {
 	filenameWithSuffix := p.Base(path) //获取文件名带后缀
 	switch mime {
 		case "image/jpeg":
-			size := getFileSize(path)
-			fmt.Printf("压缩文件：%v %.2f kb \n", p.Base(path), size)
+			size := f.GetFileSize(path)
+			fmt.Printf("正在压缩图片：%v，图片大小： %.2f kb >>>>>>>>>>>>>>> ", p.Base(path), size)
 			f.ResizeJpg(path, q)
 
 		case "image/png":
-			size := getFileSize(path)
-			fmt.Printf("压缩文件：%v %.2f kB \n", p.Base(path), size)
+			size := f.GetFileSize(path)
+			fmt.Printf("正在压缩图片：%v，图片大小： %.2f kb >>>>>>>>>>>>>>> ", p.Base(path), size)
 			f.ResizePng(path, q, filenameWithSuffix)
 		default:
 			fmt.Println(path + "不是jpeg或者png格式的文件")
 	}
-}
-// 读取文件大小
-func getFileSize(path string) float64  {
-	fileInfo, _ := os.Stat(path)
-	size := float64(fileInfo.Size()) / float64(1000)
-	return size
 }
