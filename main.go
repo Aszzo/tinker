@@ -48,13 +48,8 @@ func resize(path string)  {
 	filenameWithSuffix := p.Base(path) //获取文件名带后缀
 	switch mime {
 		case "image/jpeg":
-			size := f.GetFileSize(path)
-			fmt.Printf(">正在压缩图片：%v，图片大小： %.2f kb \n", p.Base(path), size)
 			f.ResizeJpg(path, q)
-
 		case "image/png":
-			size := f.GetFileSize(path)
-			fmt.Printf(">正在压缩图片：%v，图片大小： %.2f kb \n ", p.Base(path), size)
 			f.ResizePng(path, q, filenameWithSuffix)
 		default:
 			fmt.Println(path + "不是jpeg或者png格式的文件")
