@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/img-modify/file"
+	"github.com/Aszzo/tinker/file"
 	"testing"
 )
 
 func TestResizeJpg(t *testing.T) {
-	file.ResizeJpg("test1.jpg")
+	file.ResizeJpg("test/demo1/test.jpg", 70)
 }
 func TestResizePng(t *testing.T)  {
-	file.ResizePng("test/test.png")
+	file.ResizePng("test/test.png", 70, "test")
 }
