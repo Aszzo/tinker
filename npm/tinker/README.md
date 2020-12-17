@@ -9,8 +9,6 @@ Options:
   -q, --quality <number>  压缩图片的质量(0-100) (default: 80)
   -h, --help              display help for command
 
-
-
 ``` 
 
 

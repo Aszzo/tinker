@@ -20,7 +20,16 @@ Options:
     -q int
           压缩图片的质量（0-100） (default 80)
 ``` 
+#### node环境使用
+```bazaar
+只做了mac系统的支持
 
+1、git clone 
+2、cd npm/tinker
+3、npm install
+4、sudo npm link
+```
+[node环境使用说明](npm/tinker/README.md)
 
 
 
